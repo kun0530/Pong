@@ -10,6 +10,9 @@ protected:
 	sf::FloatRect windowBounds;
 
 public:
+	bool isDead = false;
+	bool isBoundBat = false;
+
 	Ball(Bat& bat, const sf::FloatRect& bounds);
 
 	sf::CircleShape shape;

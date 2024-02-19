@@ -44,6 +44,17 @@ int main()
         }
         ball.Update(dt);
 
+        if (ball.isDead)
+        {
+            isBallActive = true;
+            ball.Fire({ 0.f, 0.f }, 0.f);
+            // 게임 재시작 대기
+        }
+        else if (ball.isBoundBat)
+        {
+            // 점수 추가
+        }
+
         // InputMgr 테스트 코드
         // std::cout << InputMgr::GetAxisRaw(Axis::Horizontal) << ", " << InputMgr::GetAxis(Axis::Horizontal) << std::endl;
         // 숙제 테스트 코드
