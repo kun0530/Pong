@@ -1,13 +1,14 @@
 ﻿#include "pch.h"
+#include "Bat.h"
+#include "Ball.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "Pong");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Pong");
 
     InputMgr::Init();
 
+    Bat bat;
     sf::Clock clock;
     while (window.isOpen())
     {
@@ -25,12 +26,15 @@ int main()
         }
         InputMgr::Update(dt);
 
+        bat.Update(dt);
+
         // 테스트 코드
-        std::cout << InputMgr::GetAxisRaw(Axis::Horizontal) << ", " <<
-            InputMgr::GetAxis(Axis::Horizontal) << std::endl;
+        // std::cout << InputMgr::GetAxisRaw(Axis::Horizontal) << ", " << InputMgr::GetAxis(Axis::Horizontal) << std::endl;
+        // 숙제 테스트 코드
+        // std::cout << InputMgr::GetMousePos().x << ", " << InputMgr::GetMousePos().y << std::endl;
 
         window.clear();
-        window.draw(shape);
+        bat.Draw(window);
         window.display();
     }
 

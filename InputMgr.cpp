@@ -53,6 +53,12 @@ void InputMgr::UpdateEvent(const sf::Event& ev)
         ingList.remove(ev.key.code);
         upList.push_back(ev.key.code);
         break;
+    case sf::Event::MouseButtonPressed:
+        // 槛力
+        break;
+    case sf::Event::MouseButtonReleased:
+        // 槛力
+        break;
     }
 }
 
@@ -148,4 +154,28 @@ bool InputMgr::GetKeyUp(sf::Keyboard::Key key)
 bool InputMgr::GetKey(sf::Keyboard::Key key)
 {
     return std::find(ingList.begin(), ingList.end(), key) != ingList.end();
+}
+
+const sf::Vector2f& InputMgr::GetMousePos()
+{
+    // 槛力
+    return (sf::Vector2f)sf::Mouse::getPosition();
+}
+
+bool InputMgr::GetMouseButtonDown(sf::Mouse::Button key)
+{
+    // 槛力
+    return false;
+}
+
+bool InputMgr::GetMouseButtonUp(sf::Mouse::Button key)
+{
+    // 槛力
+    return false;
+}
+
+bool InputMgr::GetMouseButton(sf::Mouse::Button key)
+{
+    // 槛力
+    return false;
 }
