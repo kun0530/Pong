@@ -55,10 +55,20 @@ int main()
             // 점수 추가
         }
 
-        // InputMgr 테스트 코드
+        // 방향키 테스트 코드
         // std::cout << InputMgr::GetAxisRaw(Axis::Horizontal) << ", " << InputMgr::GetAxis(Axis::Horizontal) << std::endl;
-        // 숙제 테스트 코드
-        // std::cout << InputMgr::GetMousePos().x << ", " << InputMgr::GetMousePos().y << std::endl;
+
+        // 마우스 좌표 테스트 코드(숙제)
+        /*sf::Vector2f mousePos = InputMgr::GetMousePos();
+        std::cout << mousePos.x << ", " << mousePos.y << std::endl;*/
+
+        // 마우스 좌, 우 클릭 테스트 코드
+        if (InputMgr::GetMouseButton(sf::Mouse::Right))
+            std::cout << "!!!!!" << std::endl;
+        if (InputMgr::GetMouseButtonUp(sf::Mouse::Left))
+            std::cout << "?????" << std::endl;
+        if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
+            std::cout << ";;;;;" << std::endl;
 
         window.clear();
         bat.Draw(window);
