@@ -1,6 +1,15 @@
 #include "pch.h"
 #include "Utils.h"
 
+float Utils::Clamp(float v, float min, float max)
+{
+	if (v < min)
+		return min;
+	if (v > max)
+		return max;
+	return v;
+}
+
 float Utils::RandomValue()
 {
 	return (float)rand() / RAND_MAX;

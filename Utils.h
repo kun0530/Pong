@@ -3,6 +3,8 @@
 class Utils
 {
 public:
+	static float Clamp(float v, float min, float max);
+
 	// Random
 	static float RandomValue(); // 0.0f ~ 1.0f
 	static float RandomRange(float min, float max);
