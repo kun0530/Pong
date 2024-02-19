@@ -4,10 +4,10 @@
 Bat::Bat()
 {
 	shape.setSize({ 100.f, 5.f });
-	shape.setPosition({ 1920.f / 2.f, 1080.f - 20.f });
+	shape.setPosition({ 1920.f / 2.f, 1080.f - 100.f });
 	shape.setFillColor(sf::Color::White);
 
-	Utils::SetOrigin(shape, Origins::BC);
+	Utils::SetOrigin(shape, Origins::TC);
 }
 
 void Bat::Update(float dt)
