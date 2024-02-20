@@ -14,8 +14,12 @@ void InputMgr::Init()
 
     infoH.positives.push_back(sf::Keyboard::D);
     infoH.positives.push_back(sf::Keyboard::Right);
+    infoH.positives.push_back(MouseButtonToKey(sf::Mouse::Button::Right));
+
     infoH.negatives.push_back(sf::Keyboard::A);
     infoH.negatives.push_back(sf::Keyboard::Left);
+    infoH.negatives.push_back(MouseButtonToKey(sf::Mouse::Button::Left));
+
     infoH.sensi = 5.f;
     infoH.value = 0.f;
 
@@ -54,17 +58,17 @@ void InputMgr::UpdateEvent(const sf::Event& ev)
         upList.push_back(ev.key.code);
         break;
     case sf::Event::MouseButtonPressed:
-        // 槛力
         if (!GetMouseButton(ev.mouseButton.button))
         {
-            ingList.push_back((sf::Keyboard::Key)(ev.mouseButton.button + 71)); // mouse left(0), key left(71)
-            downList.push_back((sf::Keyboard::Key)(ev.mouseButton.button + 71)); // mouse right(1), key right(72)
+            sf::Keyboard::Key button = MouseButtonToKey(ev.mouseButton.button);
+            ingList.push_back(button);
+            downList.push_back(button);
         }
         break;
     case sf::Event::MouseButtonReleased:
-        // 槛力
-        ingList.remove((sf::Keyboard::Key)(ev.mouseButton.button + 71));
-        upList.push_back((sf::Keyboard::Key)(ev.mouseButton.button + 71));
+        sf::Keyboard::Key button = MouseButtonToKey(ev.mouseButton.button);
+        ingList.remove(button);
+        upList.push_back(button);
         break;
     }
 }
@@ -163,7 +167,7 @@ bool InputMgr::GetKey(sf::Keyboard::Key key)
     return std::find(ingList.begin(), ingList.end(), key) != ingList.end();
 }
 
-const sf::Vector2f& InputMgr::GetMousePos()
+sf::Vector2f InputMgr::GetMousePos()
 {
     // 槛力
     return (sf::Vector2f)sf::Mouse::getPosition();
@@ -172,17 +176,17 @@ const sf::Vector2f& InputMgr::GetMousePos()
 bool InputMgr::GetMouseButtonDown(sf::Mouse::Button key)
 {
     // 槛力
-    return std::find(downList.begin(), downList.end(), key) != downList.end();
+    return std::find(downList.begin(), downList.end(), key + MouseButtonToKey(key)) != downList.end();
 }
 
 bool InputMgr::GetMouseButtonUp(sf::Mouse::Button key)
 {
     // 槛力
-    return std::find(upList.begin(), upList.end(), key) != upList.end();
+    return std::find(upList.begin(), upList.end(), key + MouseButtonToKey(key)) != upList.end();
 }
 
 bool InputMgr::GetMouseButton(sf::Mouse::Button key)
 {
     // 槛力
-    return std::find(ingList.begin(), ingList.end(), key) != ingList.end();
+    return std::find(ingList.begin(), ingList.end(), MouseButtonToKey(key)) != ingList.end();
 }

@@ -63,12 +63,12 @@ int main()
         std::cout << mousePos.x << ", " << mousePos.y << std::endl;*/
 
         // 마우스 좌, 우 클릭 테스트 코드
-        if (InputMgr::GetMouseButton(sf::Mouse::Right))
+        /*if (InputMgr::GetMouseButton(sf::Mouse::Right))
             std::cout << "!!!!!" << std::endl;
         if (InputMgr::GetMouseButtonUp(sf::Mouse::Left))
             std::cout << "?????" << std::endl;
         if (InputMgr::GetMouseButtonDown(sf::Mouse::Left))
-            std::cout << ";;;;;" << std::endl;
+            std::cout << ";;;;;" << std::endl;*/
 
         window.clear();
         bat.Draw(window);
