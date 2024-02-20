@@ -1,13 +1,8 @@
 #include "pch.h"
 #include "Bat.h"
 
-Bat::Bat()
+Bat::Bat(const std::string& name) : GameObject(name)
 {
-	shape.setSize({ 100.f, 5.f });
-	shape.setPosition({ 1920.f / 2.f, 1080.f - 100.f });
-	shape.setFillColor(sf::Color::White);
-
-	Utils::SetOrigin(shape, Origins::TC);
 }
 
 void Bat::Update(float dt)
@@ -22,4 +17,14 @@ void Bat::Update(float dt)
 void Bat::Draw(sf::RenderWindow& window)
 {
 	window.draw(shape);
+}
+
+void Bat::SetSize(const sf::Vector2f size)
+{
+	shape.setSize(size);
+}
+
+void Bat::SetFillColor(const sf::Color color)
+{
+	shape.setFillColor(color);
 }

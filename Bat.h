@@ -1,6 +1,7 @@
 #pragma once
+#include "GameObject.h"
 
-class Bat
+class Bat : public GameObject
 {
 protected:
 
@@ -9,10 +10,14 @@ public:
 	float speed = 1000.f;
 	sf::RectangleShape shape;
 
-	Bat();
-
+	Bat(const std::string& name);
 
 	void Update(float dt);
 	void Draw(sf::RenderWindow& window);
+
+	void SetSize(const sf::Vector2f size);
+	void SetFillColor(const sf::Color color);
+
+	const sf::FloatRect& GetGlobalBounds() { return shape.getGlobalBounds(); }
 };
 

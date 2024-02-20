@@ -7,6 +7,12 @@ void SceneGame::Init()
 {
 	RES_MGR_FONT.Load("fonts/DS-DIGI.ttf");
 
+	bat = new Bat("Bat");
+	bat->SetSize({ 100.f, 5.f });
+	bat->SetPosition({ FRAMEWORK.GetWindowSize().x / 2.f, FRAMEWORK.GetWindowSize().y - 100.f });
+	bat->SetFillColor(sf::Color::White);
+	bat->SetOrigin(Origins::TC);
+
 	ball = new Ball("Ball");
 	ball->SetPosition({ FRAMEWORK.GetWindowSize().x / 2.f,
 		FRAMEWORK.GetWindowSize().y - 100.f });
@@ -69,7 +75,7 @@ void SceneGame::Update(float dt)
 		ballDir.x *= -1.f;
 	}
 
-	const sf::FloatRect& batBounds = bat.shape.getGlobalBounds();
+	const sf::FloatRect& batBounds = bat->GetGlobalBounds();
 	if (ballBounds.intersects(batBounds))
 	{
 		if (!isCollisionBat)
@@ -81,13 +87,13 @@ void SceneGame::Update(float dt)
 
 			if (ballBottom > batTop || ballTop < batBottom)
 			{
-				direction.y *= -1.f;
+				ballPrevPos.y *= -1.f;
 			}
 			else if (ballLeft > batRight || ballRight < batLeft)
 			{
-				direction.x *= -1.f;
+				ballPrevPos.x *= -1.f;
 			}
-			shape.setPosition(prevPos);
+			ball->SetPosition(ballPrevPos);
 			isBoundBat = true;
 			isCollisionBat = true;
 		}
