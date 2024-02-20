@@ -3,6 +3,10 @@
 #include "Bat.h"
 #include "Ball.h"
 
+SceneGame::SceneGame(SceneIds id) : Scene(id)
+{
+}
+
 void SceneGame::Init()
 {
 	RES_MGR_FONT.Load("fonts/DS-DIGI.ttf");

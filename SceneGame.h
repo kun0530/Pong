@@ -1,5 +1,5 @@
 #pragma once
-#include "Frameworks/Scene.h"
+#include "Scene.h"
 
 class Bat;
 class Ball;
@@ -16,6 +16,8 @@ private:
 	sf::FloatRect windowBounds;
 
 public:
+	SceneGame(SceneIds id);
+
 	bool isDead = false;
 	bool isBallActive = false;
 	bool isBoundBat = false;
