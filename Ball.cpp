@@ -42,7 +42,7 @@ void Ball::Update(float dt)
 	float windowBottom = windowBounds.top + windowBounds.height;
 
 	// 방법1. 충돌 시 공을 직접 프레임의 위치로 조정
-	if (ballBottom > windowBottom)
+	if (ballBottom > windowBottom + 300.f)
 	{
 		isDead = true;
 	}
@@ -83,7 +83,15 @@ void Ball::Update(float dt)
 		float batTop = batBounds.top;
 		float batBottom = batBounds.top + batBounds.height;
 
-		direction.y *= -1.f;
+		if (ballBottom > batTop || ballTop < batBottom)
+		{
+			direction.y *= -1.f;
+		}
+		else if (ballLeft > batRight || ballRight < batLeft)
+		{
+			direction.x *= -1.f;
+		}
+		shape.setPosition(prevPos);
 		isBoundBat = true;
 	}
 }
