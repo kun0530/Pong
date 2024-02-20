@@ -48,6 +48,17 @@ void SceneGame::Update(float dt)
 {
 	isBoundBat = false;
 
+	if (!isBallActive && InputMgr::GetKeyDown(sf::Keyboard::Space))
+	{
+		ball->Fire({ 1.f, -1.f }, 1000.f);
+		isBallActive = true;
+	}
+
+	float h = InputMgr::GetAxisRaw(Axis::Horizontal);
+	sf::Vector2f batPos = bat->GetPosition();
+	batPos.x += h * batSpeed * dt;
+	bat->SetPosition(batPos);
+
 	sf::Vector2f ballPrevPos = ball->GetPosition();
 	sf::Vector2f ballPos = ballPrevPos;
 	ballPos += ballDir * ballSpeed * dt;

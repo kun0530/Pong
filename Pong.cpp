@@ -31,12 +31,6 @@ int main()
         }
         InputMgr::Update(dt);
 
-        if (!isBallActive && InputMgr::GetKeyDown(sf::Keyboard::Space))
-        {
-            ball.Fire({ 1.f, -1.f }, 1000.f);
-            isBallActive = true;
-        }
-
         bat.Update(dt);
 
         if (!isBallActive)

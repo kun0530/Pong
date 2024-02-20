@@ -8,6 +8,7 @@ class SceneGame : public Scene
 {
 private:
 	Bat* bat;
+	float batSpeed = 0.f;
 
 	Ball* ball;
 	sf::Vector2f ballDir = { 0.f, 0.f };

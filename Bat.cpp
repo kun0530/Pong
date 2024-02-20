@@ -7,11 +7,6 @@ Bat::Bat(const std::string& name) : GameObject(name)
 
 void Bat::Update(float dt)
 {
-	// е╟ ют╥б
-	float h = InputMgr::GetAxisRaw(Axis::Horizontal);
-	sf::Vector2f pos = shape.getPosition();
-	pos.x += h * speed * dt;
-	shape.setPosition(pos);
 }
 
 void Bat::Draw(sf::RenderWindow& window)

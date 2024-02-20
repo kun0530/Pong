@@ -10,13 +10,8 @@ class SceneMgr : public Singleton<SceneMgr>
 protected:
 	std::vector<Scene*> scenes;
 
-	SceneIds startScene = SceneIds::SCENE_TITLE;
+	SceneIds startScene = SceneIds::SCENE_GAME;
 	SceneIds currentScene = startScene;
-
-	std::string player1Id = "";
-	std::string player2Id = "";
-
-	Modes mode = Modes::NONE;
 
 	SceneMgr() = default;
 	virtual ~SceneMgr();
@@ -31,12 +26,6 @@ public:
 
 	void Update(float dt);
 	void Draw(sf::RenderWindow& window);
-
-	void SetPlayerId(Players player, std::string playerId);
-	std::string GetPlayerId(Players player) const;
-
-	void SetMode(const Modes mode);
-	Modes GetMode() const { return mode; }
 
 	SceneMgr(const SceneMgr&) = delete;
 	SceneMgr(SceneMgr&&) = delete;

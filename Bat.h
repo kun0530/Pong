@@ -7,7 +7,6 @@ protected:
 
 public:
 	// public으로 노출해서 바깥에서 읽고 쓸 수 있게 설정
-	float speed = 1000.f;
 	sf::RectangleShape shape;
 
 	Bat(const std::string& name);
