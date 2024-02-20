@@ -1,36 +1,49 @@
 #include "pch.h"
+#include "SceneGame.h"
 #include "Bat.h"
 #include "Ball.h"
 
-Ball::Ball(const std::string& name) : GameObject(name)
+void SceneGame::Init()
 {
+	RES_MGR_FONT.Load("fonts/DS-DIGI.ttf");
+
+	ball = new Ball("Ball");
+	ball->SetPosition({ FRAMEWORK.GetWindowSize().x / 2.f,
+		FRAMEWORK.GetWindowSize().y - 100.f });
+	ball->SetFillColor(sf::Color::White);
+	ball->SetOrigin(Origins::BC);
+	AddGo(ball);
 }
 
-void Ball::SetFillColor(const sf::Color color)
+void SceneGame::Release()
 {
-	shape.setFillColor(color);
+	Scene::Release();
 }
 
-void Ball::Fire(sf::Vector2f d, float s)
+void SceneGame::Enter()
 {
-	direction = d;
-	speed = s;
 	isDead = false;
+	isBallActive = false;
+	isBoundBat = false;
+	isCollisionBat = false;
+
+	windowBounds = { { 0.f, 0.f }, { FRAMEWORK.GetWindowSize().x, FRAMEWORK.GetWindowSize().y } };
 }
 
-void Ball::Update(float dt)
+void SceneGame::Exit()
+{
+}
+
+void SceneGame::Update(float dt)
 {
 	isBoundBat = false;
 
-	sf::Vector2f prevPos = shape.getPosition();
-	sf::Vector2f pos = prevPos;
-	pos += direction * speed * dt;
-	shape.setPosition(pos);
+	sf::Vector2f ballPrevPos = ball->GetPosition();
+	sf::Vector2f ballPos = ballPrevPos;
+	ballPos += ballDir * ballSpeed * dt;
+	ball->SetPosition(ballPos);
 
-
-
-	// window 충돌 처리(숙제)
-	const sf::FloatRect& ballBounds = shape.getGlobalBounds();
+	const sf::FloatRect& ballBounds = ball->GetGlobalBounds();
 	float ballLeft = ballBounds.left;
 	float ballRight = ballBounds.left + ballBounds.width;
 	float ballTop = ballBounds.top;
@@ -41,40 +54,21 @@ void Ball::Update(float dt)
 	float windowTop = windowBounds.top;
 	float windowBottom = windowBounds.top + windowBounds.height;
 
-	// 방법1. 충돌 시 공을 직접 프레임의 위치로 조정
 	if (ballBottom > windowBottom + 300.f)
 	{
 		isDead = true;
 	}
 	else if (ballTop < windowTop)
 	{
-		shape.setPosition(prevPos);
-		direction.y *= -1.f;
+		ball->SetPosition(ballPrevPos);
+		ballDir.y *= -1.f;
 	}
 	else if (ballLeft < windowLeft || ballRight > windowRight)
 	{
-		shape.setPosition(prevPos);
-		direction.x *= -1.f;
+		ball->SetPosition(ballPrevPos);
+		ballDir.x *= -1.f;
 	}
-	// 방법2. direction에 방향 조건으로 조절
-	//if (ballTop < windowTop && direction.y < 0.f) // 위쪽 충돌
-	//{
-	//	direction.y *= -1.f;
-	//}
-	//if (ballBottom > ballBottom && direction.y > 0.f) // 아래쪽 충돌
-	//{
-	//	direction.y *= -1.f;
-	//}
-	//if (ballLeft < windowLeft && direction.x < 0.f) // 왼쪽 충돌
-	//{
-	//	direction.x *= -1.f;
-	//}
-	//if (ballRight > windowRight && direction.x > 0.f) // 오른쪽 충돌
-	//{
-	//	direction.x *= -1.f;
-	//}
 
-	// bat 충돌 처리
 	const sf::FloatRect& batBounds = bat.shape.getGlobalBounds();
 	if (ballBounds.intersects(batBounds))
 	{
@@ -104,7 +98,7 @@ void Ball::Update(float dt)
 	}
 }
 
-void Ball::Draw(sf::RenderWindow& window)
+void SceneGame::Draw(sf::RenderWindow& window)
 {
-	window.draw(shape);
+	Scene::Draw(window);
 }

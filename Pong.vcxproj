@@ -138,20 +138,38 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="SpriteGo.cpp" />
+    <ClCompile Include="TextGo.cpp" />
+    <ClCompile Include="UiScore.cpp" />
     <ClCompile Include="InputMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Pong.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="SceneGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ResourceMgr.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SpriteGo.h" />
+    <ClInclude Include="TextGo.h" />
+    <ClInclude Include="UiScore.h" />
     <ClInclude Include="InputMgr.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="SceneGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

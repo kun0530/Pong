@@ -1,22 +1,18 @@
 #pragma once
+#include "GameObject.h"
 
-class Bat; // 전방 선언
-
-class Ball
+class Ball : public GameObject
 {
 protected:
-	sf::Vector2f direction = { 0.f, 0.f };
-	Bat& bat;
-	sf::FloatRect windowBounds;
-
-public:
-	bool isDead = false;
-	bool isBoundBat = false;
-
-	Ball(Bat& bat, const sf::FloatRect& bounds);
-
 	sf::CircleShape shape;
 	float speed = 0.f;
+	sf::Vector2f direction = { 0.f, 0.f };
+
+public:
+	Ball(const std::string& name);
+
+	void SetFillColor(const sf::Color color);
+	const sf::FloatRect& GetGlobalBounds() { return shape.getGlobalBounds(); }
 
 	void Fire(sf::Vector2f d, float s);
 
