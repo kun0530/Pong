@@ -42,11 +42,14 @@ int main()
         {
             ball.shape.setPosition(bat.shape.getPosition());
         }
-        ball.Update(dt);
+        else
+        {
+            ball.Update(dt);
+        }
 
         if (ball.isDead)
         {
-            isBallActive = true;
+            isBallActive = false;
             ball.Fire({ 0.f, 0.f }, 0.f);
             // 게임 재시작 대기
         }

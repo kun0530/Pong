@@ -22,7 +22,8 @@ void Ball::Update(float dt)
 {
 	isBoundBat = false;
 
-	sf::Vector2f pos = shape.getPosition();
+	sf::Vector2f prevPos = shape.getPosition();
+	sf::Vector2f pos = prevPos;
 	pos += direction * speed * dt;
 	shape.setPosition(pos);
 
@@ -30,43 +31,58 @@ void Ball::Update(float dt)
 
 	// window 충돌 처리(숙제)
 	const sf::FloatRect& ballBounds = shape.getGlobalBounds();
+	float ballLeft = ballBounds.left;
+	float ballRight = ballBounds.left + ballBounds.width;
+	float ballTop = ballBounds.top;
+	float ballBottom = ballBounds.top + ballBounds.height;
+
+	float windowLeft = windowBounds.left;
+	float windowRight = windowBounds.left + windowBounds.width;
+	float windowTop = windowBounds.top;
+	float windowBottom = windowBounds.top + windowBounds.height;
+
 	// 방법1. 충돌 시 공을 직접 프레임의 위치로 조정
-	/*if (ballBounds.top < windowBounds.top ||
-		ballBounds.top + ballBounds.height > windowBounds.top + windowBounds.height)
+	if (ballBottom > windowBottom)
 	{
-		pos -= direction * speed * dt;
-		shape.setPosition(pos);
+		isDead = true;
+	}
+	else if (ballTop < windowTop)
+	{
+		shape.setPosition(prevPos);
 		direction.y *= -1.f;
 	}
-	if (ballBounds.left < windowBounds.left ||
-		ballBounds.left + ballBounds.width > windowBounds.left + windowBounds.width)
+	else if (ballLeft < windowLeft || ballRight > windowRight)
 	{
-		pos -= direction * speed * dt;
-		shape.setPosition(pos);
+		shape.setPosition(prevPos);
 		direction.x *= -1.f;
-	}*/
+	}
 	// 방법2. direction에 방향 조건으로 조절
-	if (ballBounds.top < windowBounds.top && direction.y < 0.f) // 위쪽 충돌
-	{
-		direction.y *= -1.f;
-	}
-	if (ballBounds.top + ballBounds.height > windowBounds.top + windowBounds.height && direction.y > 0.f) // 아래쪽 충돌
-	{
-		direction.y *= -1.f;
-	}
-	if (ballBounds.left < windowBounds.left && direction.x < 0.f) // 왼쪽 충돌
-	{
-		direction.x *= -1.f;
-	}
-	if (ballBounds.left + ballBounds.width > windowBounds.left + windowBounds.width && direction.x > 0.f) // 오른쪽 충돌
-	{
-		direction.x *= -1.f;
-	}
+	//if (ballTop < windowTop && direction.y < 0.f) // 위쪽 충돌
+	//{
+	//	direction.y *= -1.f;
+	//}
+	//if (ballBottom > ballBottom && direction.y > 0.f) // 아래쪽 충돌
+	//{
+	//	direction.y *= -1.f;
+	//}
+	//if (ballLeft < windowLeft && direction.x < 0.f) // 왼쪽 충돌
+	//{
+	//	direction.x *= -1.f;
+	//}
+	//if (ballRight > windowRight && direction.x > 0.f) // 오른쪽 충돌
+	//{
+	//	direction.x *= -1.f;
+	//}
 
 	// bat 충돌 처리
 	const sf::FloatRect& batBounds = bat.shape.getGlobalBounds();
 	if (ballBounds.intersects(batBounds) && direction.y > 0)
 	{
+		float batLeft = batBounds.left;
+		float batRight = batBounds.left + batBounds.width;
+		float batTop = batBounds.top;
+		float batBottom = batBounds.top + batBounds.height;
+
 		direction.y *= -1.f;
 		isBoundBat = true;
 	}
