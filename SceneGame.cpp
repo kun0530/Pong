@@ -117,6 +117,28 @@ void SceneGame::Update(float dt)
 	{
 		isCollisionBat = false;
 	}
+
+	bat->Update(dt);
+
+	if (!isBallActive)
+	{
+		ball->SetPosition(bat->GetPosition());
+	}
+	else
+	{
+		ball->Update(dt);
+	}
+
+	if (isDead)
+	{
+		isBallActive = false;
+		ball->Fire({ 0.f, 0.f }, 0.f);
+		// 게임 재시작 대기
+	}
+	else if (isBoundBat)
+	{
+		// 점수 추가
+	}
 }
 
 void SceneGame::Draw(sf::RenderWindow& window)
